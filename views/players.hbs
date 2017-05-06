@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cricko</title>
+  <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <style>
+  h1{
+    font-family: 'Great Vibes';
+    font-size: 4.5em;
+  }
+  .player-list{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .player-list h3, a{
+    font-family: 'Raleway';
+  }
+  .player-list h3{
+    margin-top: 10px;
+    padding: 15px 20px;
+
+  }
+
+  .player-list h3 a{
+    color: black;
+    text-decoration: none;
+    position: relative;
+  }
+
+  .player-list h3 a:before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    bottom: -10px;
+    transform: scaleX(0.2);
+    transition: transform 0.2s ease-in;
+  }
+
+  .player-list h3 a:hover:before{
+    transform: scaleX(1);
+  }
+
+  .player-list, h1{
+    text-align: center;
+  }
+
+  .add-player{
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .add-player a{
+    background-color: #7a3;
+    color: white;
+    padding: 1em 2em;
+    transition: background-color 0.25s ease-in;
+    text-decoration: none;
+  }
+  .add-player a:hover{
+    background-color: #436910;
+  }
+  </style>
+</head>
+
+
+  <body>
+    <h1>Players</h1>
+    <div class="player-list">
+      <div class="list-container">
+        {{#each player.batsman as |value key|}}
+          <h3><a href="../player/{{ value.userid }}">{{ value.name }}</a></h3>
+        {{/each}}
+      </div>
+      <div class="list-container">
+        {{#each player.bowler as |value key|}}
+          <h3><a href="../player/{{ value.userid }}">{{ value.name }}</a></h3>
+        {{/each}}
+      </div>
+      <div class="list-container">
+        {{#each player.all-rounder as |value key|}}
+          <h3><a href="../player/{{ value.userid }}">{{ value.name }}</a></h3>
+        {{/each}}
+      </div>
+      <div class="list-container">
+        {{#each player.wicket-keeper as |value key|}}
+          <h3><a href="../player/{{ value.userid }}">{{ value.name }}</a></h3>
+        {{/each}}
+      </div>
+      <div class="list-container">
+        {{#each player.legend as |value key|}}
+          <h3><a href="../player/{{ value.userid }}">{{ value.name }}</a></h3>
+        {{/each}}
+      </div>
+
+    </div>
+    <div class="add-player">
+      <a href="/">Add a player</a>
+    </div>
+
+  </body>
+</html>

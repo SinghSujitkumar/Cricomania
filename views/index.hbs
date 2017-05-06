@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  {{> head}}
+  <style>
+    body{
+      height: 100vh;
+      margin: 0;
+      position: relative;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .form-group{
+      width: 60%;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .form-group form{
+      margin-bottom: 50px;
+    }
+
+    .form-group form .button{
+      font-family: "Open Sans";
+      font-weight: 400;
+      color: white;
+      background-color: black;
+      border: 1px solid black;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background-color 0.5s ease;
+      text-decoration: none;
+      text-align: center;
+      padding: 12px 15px;
+      font-size: 12px;
+    }
+
+    .form-group form .button:hover{
+      color: black;
+      background-color: white;
+
+    }
+
+    .form-group h1{
+      background-color: #4d4d4d;
+      color: #797979;
+      font-family: "Open Sans";
+      padding: 5px;
+      font-size: 1.5em;
+      margin-top: 0;
+      margin-bottom: 1.3em;
+      padding-left: 10px;
+    }
+    .input-field{
+      margin-bottom: 40px;
+      width: 100%;
+      position: relative;
+      text-align: center;
+    }
+    .input-field input{
+      width: 80%;
+      border: none;
+      border-bottom: 1px solid #ddd;
+      font-family: "Open Sans";
+    }
+    .input-field input:focus{
+      outline-width: 0;
+    }
+    .submit-field{
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+    }
+    .input-field.checkbox{
+      text-align: left;
+    }
+
+    .input-field.checkbox ul li{
+      list-style-type: none;
+      font-family: "Open Sans";
+    }
+
+    .input-field.checkbox input{
+      width: 10px;
+    }
+  </style>
+  <body>
+    {{#if name}}
+    <h2>{{name}}</h2>
+    {{/if}}
+    <div class="form-group">
+
+      <h1>Add a player</h1>
+      <form action="/submitid" method="POST">
+        <div class="input-field">
+
+          <input type="text" placeholder="Id" name="id">
+        </div>
+        <div class="input-field">
+
+          <input type="text" placeholder="Imagerul" name="imageurl">
+        </div>
+
+        <div class="input-field">
+
+          <input type="text" placeholder="Price" name="price">
+        </div>
+        <div class="input-field checkbox">
+          <ul>
+            <li>
+              <input type="radio" name="playerRole" id = "batsman"value="batsman">
+              <label for="batsman">Batsman</label>
+            </li>
+
+            <li>
+              <input type="radio" name="playerRole" id = "bowler"value="bowler">
+              <label for="bowler">Bowler</label>
+            </li>
+
+            <li>
+              <input type="radio" name="playerRole" id = "all-rounder"value="all-rounder">
+              <label for="all-rounder">All Rounder</label>
+            </li>
+
+            <li>
+              <input type="radio" name="playerRole" id = "wicket-keeper"value="wicket-keeper">
+              <label for="wicket-keeper">Wicket Keeper</label>
+            </li>
+
+            <li>
+              <input type="radio" name="playerRole" id = "legend"value="legend">
+              <label for="wicket-keeper">Legend</label>
+            </li>
+          </ul>
+
+        </div>
+        <div class="submit-field">
+          <button type="submit" class="button">Submit</button>
+          <a href="/player" class="button">Players</a>
+        </div>
+
+      </form>
+    </div>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+  {{> head}}
+  <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css">
+  <style>
+  body{
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-y: hidden;
+  }
+  .background-image{
+    position: absolute;
+    height: 110vh;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-image: url("/images/pitch.jpg");
+    background-size: cover;
+    filter: blur(2px);
+    z-index: -1;
+  }
+  .image-container{
+    margin-top: 20px;
+    position: relative;
+    flex-grow: 1.5;
+
+  }
+  .image-container img{
+    max-width: 100%;
+    max-height: 100%;
+    min-height: 80%;
+    margin: auto;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+
+  }
+  .info, .buttons, .empty, .table-container{
+    max-width: 600px;
+  }
+  .info{
+    width: 100%;
+    text-align: left;
+    background-color: #1a3771;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+
+  .info h1, .info h2{
+    border-bottom: 1px solid #bbbaba;
+  }
+
+  .buttons{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    height: 60px;
+    background-color: #1e4eaf;
+    cursor: pointer;
+
+  }
+  .buttons .selected{
+    background-color: #071148;
+    box-shadow: 1px 1px 3px black;
+  }
+
+  .buttons h2{
+    flex-grow: 1;
+    transition: all 0.5s ease;
+  }
+  .buttons h2:hover{
+    background-color: #112384;
+  }
+
+  .buttons h2.selected:hover{
+    background-color: #071148;
+  }
+
+  .empty{
+    height: 20px;
+    border-bottom: 1px solid #bbbaba;
+    background-color: #071148;
+    width: 100%;
+  }
+  h1, h2{
+    text-align: center;
+    font-family: "Raleway";
+    font-weight: 400;
+    color: white;
+    margin: 0;
+    text-align: left;
+    padding: 5px;
+
+  }
+
+  h1{
+    font-size: 1.8em;
+  }
+  h2{
+    font-size: 1.4em;
+  }
+  .container{
+    display: flex;
+    justify-content: space-around;
+    height: 90vh;
+    top: 5%;
+    position: relative;
+  }
+
+  .hide{
+    opacity: 0
+  }
+
+  .table-container-parent{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    position: relative;
+    margin: 15px;
+    flex-direction: column;
+  }
+
+
+  .table-content{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .table-container{
+
+    position: absolute;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 2px;
+    font-family: "Raleway";
+    font-size: 1.3em;
+    border-spacing: 0;
+    width: 100%;
+    border-top: 0;
+    transition: all 0.5s ease;
+
+  }
+  th, td{
+    padding: 10px;
+  }
+  tr:last-of-type td{
+    border-bottom: none;
+  }
+  tr:nth-of-type(2n + 1){
+    background-color: #EBEBEB;
+  }
+  tr:nth-of-type(2n){
+    background-color: #bbbaba;
+  }
+  .thead-container tr{
+    background-color: #252731;
+    color: white;
+  }
+  .thead-container tr th{
+    font-weight: 300;
+    font-size: 1.2em;
+  }
+  /*tr td{
+    font-size: 1.5em;
+  }*/
+  td, th{
+    border-right: 2px solid #969494;
+  }
+  td:last-of-type, th:last-of-type{
+    border-right: none;
+  }
+
+  .navigate{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+  }
+
+  .navigate a{
+    text-decoration: none;
+    font-size: 60px;
+    color: transparent;
+    transition: font-size 0.2s ease;
+  }
+
+  .navigate a:hover{
+    font-size: 100px;
+  }
+
+  .navigate.previous{
+    left: 5px;
+  }
+
+  .navigate.next{
+    right: 5px;
+  }
+
+
+  </style>
+  <body>
+    <div class="background-image">
+
+    </div>
+
+
+    <div class="container">
+
+      <div class="navigate previous">
+        <a href="/player/{{math userid '-' 1}}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+      </div>
+
+
+
+      <div class="table-container-parent">
+        <div class="info">
+          <input type="hidden" name="playerStance" value="{{ playerRole }}">
+          <h1> {{ name }} </h1>
+          <h1><strong>Price:</strong> ₹  {{ price }} Cr</h1>
+          <h2 class="batting"><strong>Batting :</strong> {{ battingStyle }}</h2>
+          <h2 class="bowling"><strong>Bowling :</strong> {{ bowlingStyle }}</h2>
+
+        </div>
+        <div class="buttons">
+          <h2 class="batting">Batting</h2>
+          <h2 class="bowling">Bowling</h2>
+        </div>
+        <div class="empty">
+
+        </div>
+        <div class="table-content">
+          <table class="table-container batting">
+            <thead class="thead-container">
+
+              <tr>
+                  <th>Stat</th>
+                {{#each reqArray as |value key|}}
+                  <th>{{value}}</th>
+                {{/each}}
+
+              </tr>
+            </thead>
+            <tbody class="tbody-container">
+              {{#each batting as |value key|}}
+                <tr>
+                  <td>{{key}}</td>
+                  {{#each value}}
+                    <td>{{this}}</td>
+                  {{/each}}
+                </tr>
+
+              {{/each}}
+            </tbody>
+          </table>
+          <table class="table-container bowling">
+            <thead class="thead-container">
+
+              <tr>
+                <th>Stat</th>
+                <th>Twenty20</th>
+                <th>ODI</th>
+                <th>Tests</th>
+              </tr>
+            </thead>
+            <tbody class="tbody-container">
+              {{#each bowling as |value key|}}
+                <tr>
+                  <td>{{key}}</td>
+                  {{#each value}}
+                    <td>{{this}}</td>
+                  {{/each}}
+                </tr>
+
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="image-container">
+        <img src="{{imageURL}}" alt="player image">
+      </div>
+
+      <div class="navigate next">
+        <a href='/player/{{math userid "+" 1}}' id="#next"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+      </div>
+
+    </div>
+    <script src="/js/jquery-2.1.1.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      var childHeight = ($(".table-content .batting").height() > $(".table-content .bowling").height() ?$(".table-content .batting").height():$(".table-content .bowling").height());
+      $(".table-content").height(childHeight);
+      var playerStance = $(".info input").attr("value");
+      console.log(playerStance);
+      if(playerStance == "batsman" || playerStance == "all-rounder" || playerStance == "wicket-keeper" || playerStance == "legend"){
+        $(".batting").addClass("selected");
+        $(".table-content .bowling").addClass("hide");
+      }else{
+        $(".bowling").addClass("selected");
+        $(".table-content .batting").addClass("hide");
+      }
+
+      if(playerStance == "batsman" || playerStance == "wicket-keeper"){
+        $(".info .bowling").css("display", "none");
+      }else if(playerStance == "bowler"){
+        $(".info .batting").css("display", "none");
+      }
+      $(".buttons .batting").click(function(){
+          $(".bowling").removeClass("selected");
+          $(".batting").addClass("selected");
+          $(".table-content .bowling").addClass("hide");
+          $(".table-content .batting").removeClass("hide");
+      });
+      $(".buttons .bowling").click(function(){
+          $(".batting").removeClass("selected");
+          $(".bowling").addClass("selected");
+          $(".table-content .batting").addClass("hide");
+          $(".table-content .bowling").removeClass("hide");
+      });
+      $(document).keydown(function(e){
+        if(e.keyCode == 39){
+          window.location = $(".navigate.next a").attr('href');
+        }
+        else if(e.keyCode == 37){
+          window.location = $(".navigate.previous a").attr('href');
+        }
+      });
+    });
+    </script>
+  </body>
+</html>
