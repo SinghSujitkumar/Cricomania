@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
+  "author": "Mitesh Goplani",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.15.3",

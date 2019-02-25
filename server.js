@@ -10,7 +10,7 @@ var app = express();
 const bodyParser= require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 
 app.set('view engine', 'hbs');
@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
 
 app.post('/submitid', (req, res) => {
   var id = parseInt(req.body.id);
-  var key = "NpWBYl8ujFW4ZmN0LoFRfcCITFn1";
+  var key = "ZkLB9WG14aRfHgxfuTp6oRp5czp2";
   console.log(id);
   // var cricURI = `http://cricapi.com/api/playerStats?pid=${id}&apikey=NpWBYl8ujFW4ZmN0LoFRfcCITFn1`;
   var cricURI = `http://cricapi.com/api/playerStats`
@@ -59,7 +59,7 @@ app.post('/submitid', (req, res) => {
       throw new Error('Unable to find that address');
     }
     var cricresult = response.data;
-    // console.log(JSON.stringify(result, null, 2));
+    console.log(cricresult);
     var player = new Player({
       name: cricresult.name,
       userid: id,

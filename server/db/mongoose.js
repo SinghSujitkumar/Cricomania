@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://mongodb/Csi');
+mongoose.connect('mongodb://localhost:27017/Csi');
 
 module.exports = {
   mongoose

@@ -1,7 +1,3 @@
-/**
- * Created by chrisward on 5/03/2016.
- */
-
 'use strict';
 
 const electron = require('electron');
